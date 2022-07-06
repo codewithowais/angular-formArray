@@ -1,0 +1,37 @@
+<div class="container mt-5" style="width: 100%" cdkDropListGroup>
+
+    <div class="row">
+        <!-- <div cdkDropList  [cdkDropListData]="todo" 
+            class="col-md-3 customBorder" (cdkDropListDropped)="drop($event)">
+            <div class="row  example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+        </div>
+
+        <div cdkDropList [cdkDropListData]="periods" 
+            class="col-md-3 customBorder" (cdkDropListDropped)="drop($event)">
+            <div class="row  example-box" *ngFor="let item of periods" cdkDrag>{{item}}</div>
+        </div>
+        
+        <div cdkDropList [cdkDropListData]="Days"
+            class="col-md-3 customBorder" (cdkDropListDropped)="drop($event)">
+            <div class="row  example-box" *ngFor="let item of Days" cdkDrag>{{item}}</div>
+        </div> -->
+
+        <div 
+            cdkDropList
+            [cdkDropListData]="list"
+            class="col-md-3 customBorder" 
+            (cdkDropListDropped)="drop($event)"
+            *ngFor="let list of lists">
+            <div class="row  example-box" *ngFor="let item of list" cdkDrag>{{item}}</div>
+        </div>
+        
+        <div
+            cdkDropList
+            [cdkDropListData]="Subjects"
+            class="col-md-3 customBorder"
+            (cdkDropListDropped)="drop($event)">
+            <div class="row  example-box" *ngFor="let item of Subjects" cdkDrag>{{item}}</div>
+        </div>
+    </div>
+
+</div>
