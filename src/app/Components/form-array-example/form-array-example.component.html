@@ -1,65 +1,67 @@
 <div class="container">
-    <div class="row mt-5">
-        <div class="col-md-3">
-            <label>Select Branch <span class="required">*</span></label>
-            <select name="" id="" class="form-control">
-                <option value="">Select Branch</option>
-                <option value="">SimpliEd</option>
-            </select>
+    <form class="form-horizontal" (ngSubmit)="submit()" [formGroup]="timeTableForm">
+        <div class="row mt-5">        
+            <div class="col-md-3">
+                <label>Select Branch <span class="required">*</span></label>
+                <select name="" id="" class="form-control" formControlName="branch">
+                    <option value="">Select Branch</option>
+                    <option value="">SimpliEd</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Select Grade <span class="required">*</span></label>
+                <select name="" id="" class="form-control" formControlName="grade">
+                    <option value="">Select Grade</option>
+                    <option value="">SimpliEd</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>School Days <span class="required">*</span></label>
+                <select name="" id="" class="form-control" formControlName="school_day">
+                    <option value="">5</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-primary">Create TimeTable</button>
+            </div>
         </div>
-        <div class="col-md-3">
-            <label>Select Grade <span class="required">*</span></label>
-            <select name="" id="" class="form-control">
-                <option value="">Select Grade</option>
-                <option value="">SimpliEd</option>
-            </select>
-        </div>
-        <div class="col-md-3">
-            <label>School Days <span class="required">*</span></label>
-            <select name="" id="" class="form-control">
-                <option value="">5</option>
-            </select>
-        </div>
-        <div class="col-md-3">
-            <button class="btn btn-primary">Create TimeTable</button>
-        </div>
-    </div>
-    <div class="row mt-3 d-flex">
-        <div class="col-md-8 m-3">
-            <mat-chip-list aria-label="Fish selection">
-                <mat-chip [color]="i == selectedIndex ? 'primary' : 'default'" class="d-flex"
-                    *ngFor="let tab of tabs;let i = index;" (click)="getTabIndex(i)" selected>{{tab.label}}</mat-chip>
-            </mat-chip-list>
-            <div class="card rounded-lg p-3 ">
-                <table>
-                    <thead>
-                        <th *ngFor="let item of keys">{{item}}</th>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of tabs[selectedIndex].periods">
-                            <td *ngFor="let field of item.fields">
-                                <ng-container *ngIf="field.inputType == 'action'">
-                                    <mat-icon>delete_outline</mat-icon>
-                                </ng-container>
-                                <ng-container *ngIf="field.inputType != 'action'">
-                                    <input [type]="field.inputType" [ngClass]="field.class">
-                                </ng-container>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <mat-icon>add_box</mat-icon>
-                        <span class="font-weight600">
-                            Add more row</span>
-                    </div>
-                    <div class="col-md-6">
-                        <button mat-raised-button class="btn btn-primary floatt" color="primary"
-                            type="submit">Save</button>
+        <div class="row mt-3 d-flex">
+            <div class="col-md-8 m-3">
+                <mat-chip-list aria-label="Fish selection">
+                    <mat-chip [color]="i == selectedIndex ? 'primary' : 'default'" class="d-flex"
+                        *ngFor="let tab of tabs;let i = index;" (click)="getTabIndex(i)" selected>{{tab.label}}</mat-chip>
+                </mat-chip-list>
+                <div class="card rounded-lg p-3 ">
+                    <table>
+                        <thead>
+                            <th *ngFor="let item of keys" class="p-1">{{item}}</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of tabs[selectedIndex].periods">
+                                <td *ngFor="let field of item.fields" class="p-1">
+                                    <ng-container *ngIf="field.inputType == 'action'">
+                                        <mat-icon (click)="removeRow()">delete_outline</mat-icon>
+                                    </ng-container>
+                                    <ng-container *ngIf="field.inputType != 'action'">
+                                        <input [type]="field.inputType" [ngClass]="field.class" [formControlName]="field.formControlName">
+                                    </ng-container>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <mat-icon>add_box</mat-icon>
+                            <span class="font-weight600" (click)="addMoreRow()">
+                                Add more row</span>
+                        </div>
+                        <div class="col-md-6">
+                            <button mat-raised-button class="btn btn-primary floatt" color="primary"
+                                type="submit">Save</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>

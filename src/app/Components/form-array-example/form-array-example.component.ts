@@ -12,16 +12,17 @@ export interface TabType {
   templateUrl: './form-array-example.component.html',
   styleUrls: ['./form-array-example.component.scss']
 })
+
 export class FormArrayExampleComponent implements OnInit {
   selectedIndex = 0;
-
+  structureList: any;
   timeTableForm = new FormGroup({
     academicYear: new FormControl(),
     branch: new FormControl(),
     grade: new FormControl(),
+    school_day: new FormControl(),
     id: new FormControl(),
     school: new FormControl(),
-    school_day: new FormControl(),
     structure: new FormArray([
     ]),
   })
@@ -39,25 +40,25 @@ export class FormArrayExampleComponent implements OnInit {
       {
         key: 'Break',
         inputType: 'radio',
-        formControlName: "",
+        formControlName: "school_day",
         class: "form-check-input "
       },
       {
         key: 'Periods',
         inputType: 'text',
-        formControlName: "",
+        formControlName: "school_day",
         class: "form-control "
       },
       {
         key: 'StartTime',
         inputType: 'text',
-        formControlName: "",
+        formControlName: "school_day",
         class: "form-control "
       },
       {
         key: 'StartTime',
         inputType: 'text',
-        formControlName: "",
+        formControlName: "school_day",
         class: "form-control "
       },
       {
@@ -90,14 +91,21 @@ export class FormArrayExampleComponent implements OnInit {
       label: 'Friday',
       periods: [this.tempPeriodStructure]
     },
+    {
+      label: 'Saturday',
+      periods: [this.tempPeriodStructure]
+    },
   ];
-  form = new FormArray(this.tabs.map(() => new FormGroup({})));
-  options = this.tabs.map(() => <FormlyFormOptions>{});
+  // form = new FormArray(this.tabs.map(() => new FormGroup({})));
+  // options = this.tabs.map(() => <FormlyFormOptions>{});
 
   constructor() { }
 
   ngOnInit(): void {
-    for (let i = 0; i <= 5; i++) {
+    this.structureList = this.getStructure().controls
+    console.log("Structureeeeeee lISsttttttttttttttttttt",this.structureList)
+    const schoolDays = this.timeTableForm.get('school_day')
+    for (let i = 0; i <= schoolDays?.value ; i++) {
       this.getStructure().push(this.addStructure());
     }
   }
@@ -115,12 +123,27 @@ export class FormArrayExampleComponent implements OnInit {
 
 
   submit() {
-    console.log(this.form)
-    // alert(JSON.stringify(this.model));
+    console.log(this.timeTableForm.get('branch'))
+    console.log("structure >>>>>> ",this.timeTableForm.get('structure'))
+    // this.timeTableForm.get('structure').
+    // console.log(this.form)
+    console.log(this.timeTableForm)
   }
+
   getTabIndex(index: number) {
     console.log(index);
     this.selectedIndex = index;
+  }
+
+  addMoreRow(){
+    console.log("Add",this.selectedIndex)
+    this.tabs[this.selectedIndex].periods.push(this.tempPeriodStructure)
+  }
+
+  removeRow(){
+    console.log("Remove",this.selectedIndex);
+    const currentTab = this.tabs[this.selectedIndex].periods
+    currentTab.splice(currentTab.length-1, 1)
   }
 
 }
