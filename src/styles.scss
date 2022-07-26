@@ -17,4 +17,14 @@ body {
 
 .mat-chip-list-wrapper{
     justify-content: space-between !important;
+    margin-top: -1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.mat-chip{
+    color: #ECEDF0;
+}
+
+.mat-chip:checked{
+    color: #3C26BF;
 }
