@@ -123,6 +123,7 @@ export class FormArrayExampleComponent implements OnInit {
 
 
   submit() {
+    this.selectedIndex++
     console.log(this.timeTableForm.get('branch'))
     console.log("structure >>>>>> ",this.timeTableForm.get('structure'))
     // this.timeTableForm.get('structure').
